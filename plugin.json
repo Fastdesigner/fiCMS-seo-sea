@@ -24,5 +24,10 @@
       "installLocation": "PLUGINPATH/meta",
       "required": true
     }
+  },
+  "autoload": {
+    "psr4": {
+      "ficmsSeoSea\\": "src/"
+    }
   }
 }
