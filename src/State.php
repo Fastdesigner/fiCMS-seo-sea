@@ -17,7 +17,7 @@ class State {
 	}
 
 	public static function write($name, $data) {
-		return \helper__files_write(self::file($name),is_array($data) ? $data : [],true,true);
+		return \ficms\Files::writeContent(self::file($name),is_array($data) ? $data : [],true,true);
 	}
 
 	public static function sourceKey($provider, $pageId, $formId = '') {

@@ -90,7 +90,7 @@ class LeadInbox {
 
 	protected function archive($file, $state) {
 		$target = PLUGINPATH.'/'.State::PLUGIN.'/data/inbox/'.preg_replace('/[^a-z0-9_-]/i','',trim((string) $state)).'/'.basename($file);
-		if (!\helper__files_mkdir($target,true)) return false;
+		if (!\ficms\Files::ensureDirectoryFor($target,true)) return false;
 		return rename($file,$target);
 	}
 }

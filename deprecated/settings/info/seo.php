@@ -48,11 +48,11 @@ if (isset($_POST['settings'],$_POST['type']) && $_POST['type'] == $settings['key
 		$seo['keywords'] = $seo['visibility']->normalizeList($_POST['seo_google_search_keywords'] ?? '');
 		$seo['brand_terms'] = $seo['visibility']->normalizeList($_POST['seo_google_search_brand_terms'] ?? '');
 		$seo['days'] = max(7,min(180,intval($_POST['seo_google_search_days'] ?? 90)));
-		parseSetting('seo_google_account_ref',$seo['google_account_ref'],true,$user['id']);
-		parseSetting('seo_google_search_property',$seo['property'],true,$user['id']);
-		parseSetting('seo_google_search_keywords',helper__json_stringify($seo['keywords']),true,$user['id'],1);
-		parseSetting('seo_google_search_brand_terms',helper__json_stringify($seo['brand_terms']),true,$user['id'],1);
-		parseSetting('seo_google_search_days',$seo['days'],true,$user['id']);
+		\system__settings('seo_google_account_ref',$seo['google_account_ref'],true,$user['id']);
+		\system__settings('seo_google_search_property',$seo['property'],true,$user['id']);
+		\system__settings('seo_google_search_keywords',helper__json_stringify($seo['keywords']),true,$user['id'],1);
+		\system__settings('seo_google_search_brand_terms',helper__json_stringify($seo['brand_terms']),true,$user['id'],1);
+		\system__settings('seo_google_search_days',$seo['days'],true,$user['id']);
 		$seo['output']['result'] = ['result'=>true];
 		$_POST['handled'] = true;
 	}
@@ -62,10 +62,10 @@ if (isset($_POST['settings'],$_POST['type']) && $_POST['type'] == $settings['key
 		$seo['meta_page_id'] = trim((string) ($_POST['seo_meta_page_id'] ?? ''));
 		$seo['meta_form_id'] = trim((string) ($_POST['seo_meta_form_id'] ?? ''));
 		$seo['meta_form_name'] = trim((string) ($_POST['seo_meta_form_name'] ?? ''));
-		parseSetting('seo_meta_account_ref',$seo['meta_account_ref'],true,$user['id']);
-		parseSetting('seo_meta_page_id',$seo['meta_page_id'],true,$user['id']);
-		parseSetting('seo_meta_form_id',$seo['meta_form_id'],true,$user['id']);
-		parseSetting('seo_meta_form_name',$seo['meta_form_name'],true,$user['id']);
+		\system__settings('seo_meta_account_ref',$seo['meta_account_ref'],true,$user['id']);
+		\system__settings('seo_meta_page_id',$seo['meta_page_id'],true,$user['id']);
+		\system__settings('seo_meta_form_id',$seo['meta_form_id'],true,$user['id']);
+		\system__settings('seo_meta_form_name',$seo['meta_form_name'],true,$user['id']);
 		$seo['output']['result'] = $seo['lead_sources']->enableMetaForm($seo['meta_account_ref'],$seo['meta_page_id'],$seo['meta_form_id'],$seo['meta_form_name']);
 		$seo['sources'] = \ficmsSeoSea\State::read('lead-sources');
 		$_POST['handled'] = true;
