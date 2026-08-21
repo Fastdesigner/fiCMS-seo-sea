@@ -29,5 +29,8 @@
     "psr4": {
       "ficmsSeoSea\\": "src/"
     }
-  }
+  },
+  "requires": [
+    "ficms\\Files::ensureDirectoryFor"
+  ]
 }
