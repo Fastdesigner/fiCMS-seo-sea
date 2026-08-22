@@ -31,6 +31,7 @@
     }
   },
   "requires": [
-    "ficms\\Files::ensureDirectoryFor"
+    "ficms\\Files::ensureDirectoryFor",
+    "ficms\\Settings::set"
   ]
 }

@@ -46,7 +46,7 @@ if (isset($_POST['settings'],$_POST['type']) && $_POST['type'] == $settings['key
 		$seo['keywords'] = $seo['visibility']->normalizeList($_POST['seo_google_search_keywords'] ?? '');
 		$seo['brand_terms'] = $seo['visibility']->normalizeList($_POST['seo_google_search_brand_terms'] ?? '');
 		$seo['days'] = max(7,min(180,intval($_POST['seo_google_search_days'] ?? 90)));
-		foreach (['seo_google_account_ref'=>$seo['google_account_ref'],'seo_google_search_property'=>$seo['property'],'seo_google_search_keywords'=>helper__json_stringify($seo['keywords']),'seo_google_search_brand_terms'=>helper__json_stringify($seo['brand_terms']),'seo_google_search_days'=>$seo['days']] as $seo['name'] => $seo['value']) \system__settings($seo['name'],$seo['value'],true,$user['id'],str_contains($seo['name'],'keywords') || str_contains($seo['name'],'brand_terms') ? 1 : 0);
+		foreach (['seo_google_account_ref'=>$seo['google_account_ref'],'seo_google_search_property'=>$seo['property'],'seo_google_search_keywords'=>helper__json_stringify($seo['keywords']),'seo_google_search_brand_terms'=>helper__json_stringify($seo['brand_terms']),'seo_google_search_days'=>$seo['days']] as $seo['name'] => $seo['value']) \ficms\Settings::set($seo['name'],$seo['value'],$user['id'],str_contains($seo['name'],'keywords') || str_contains($seo['name'],'brand_terms'));
 		$seo['output']['result'] = ['result'=>true];
 		$_POST['handled'] = true;
 	}
@@ -55,7 +55,7 @@ if (isset($_POST['settings'],$_POST['type']) && $_POST['type'] == $settings['key
 		$seo['meta_page_id'] = trim((string) ($_POST['seo_meta_page_id'] ?? ''));
 		$seo['meta_form_id'] = trim((string) ($_POST['seo_meta_form_id'] ?? ''));
 		$seo['meta_form_name'] = trim((string) ($_POST['seo_meta_form_name'] ?? ''));
-		foreach (['seo_meta_account_ref'=>$seo['meta_account_ref'],'seo_meta_page_id'=>$seo['meta_page_id'],'seo_meta_form_id'=>$seo['meta_form_id'],'seo_meta_form_name'=>$seo['meta_form_name']] as $seo['name'] => $seo['value']) \system__settings($seo['name'],$seo['value'],true,$user['id']);
+		foreach (['seo_meta_account_ref'=>$seo['meta_account_ref'],'seo_meta_page_id'=>$seo['meta_page_id'],'seo_meta_form_id'=>$seo['meta_form_id'],'seo_meta_form_name'=>$seo['meta_form_name']] as $seo['name'] => $seo['value']) \ficms\Settings::set($seo['name'],$seo['value'],$user['id']);
 		$seo['output']['result'] = $seo['lead_sources']->enableMetaForm($seo['meta_account_ref'],$seo['meta_page_id'],$seo['meta_form_id'],$seo['meta_form_name']);
 		$seo['sources'] = \ficmsSeoSea\State::read('lead-sources');
 		$_POST['handled'] = true;
